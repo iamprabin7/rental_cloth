@@ -1,6 +1,4 @@
-# React JS Ecommerce with Laravel 8
-### Check the Laravel 8 API in another branch.
-
+# React JS Ecommerce with Laravel 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
