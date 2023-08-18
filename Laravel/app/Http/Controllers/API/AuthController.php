@@ -100,6 +100,18 @@ class AuthController extends Controller
             'status'=>200,
             'message'=>'Logged Out Successfully',
         ]);
+
+    }
+
+    public function getProfile(Request $request)
+    {
+        $user = $request->user();
+
+        return response()->json([
+            'status' => 200,
+            'user' => $user,
+        ]);
+
     }
 
 }

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import swal from 'sweetalert';
 function ViewProduct()
 {
 
@@ -28,6 +28,27 @@ function ViewProduct()
         };
     }, []);
 
+    const deleteProduct = (e, id) => {
+        e.preventDefault();
+        
+        const thisClicked = e.currentTarget;
+        thisClicked.innerText = "Deleting";
+
+        axios.delete(`/api/delete-product/${id}`).then(res=>{
+            if(res.data.status === 200)
+            {
+                swal("Success",res.data.message,"success");
+                thisClicked.closest("tr").remove();
+            }
+            else if(res.data.status === 404)
+            {
+                swal("Success",res.data.message,"success");
+                thisClicked.innerText = "Delete";
+            }
+        });
+
+    }
+
     var display_Productdata = "";
     if(loading)
     {
@@ -40,14 +61,17 @@ function ViewProduct()
             return (
                 <tr key={item.id}>
                     <td>{item.id}</td>
-                    <td>{item.category.name}</td>
+                    <td>{item.name}</td>
                     <td>{item.name}</td>
                     <td>{item.selling_price}</td>
                     <td><img src={`http://localhost:8000/${item.image}`} width="50px" alt={item.name} /></td>
                     <td>
                         <Link to={`edit-product/${item.id}`} className="btn btn-success btn-sm">Edit</Link>
                     </td>
-                    <td>{item.status === 0 ? 'Visible':'Hidden'}</td>
+                    <td>
+                        <button type="button" onClick={ (e) => deleteProduct(e, item.id) } className="btn btn-danger btn-sm">Delete</button>
+                    </td>
+                    {/* <td>{item.status === 0 ? 'Visible':'Hidden'}</td> */}
                 </tr>
             )
         });
@@ -72,7 +96,7 @@ function ViewProduct()
                                 <th>Selling Price</th>
                                 <th>Image</th>
                                 <th>Edit</th>
-                                <th>Status</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>

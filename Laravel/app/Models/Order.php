@@ -21,6 +21,7 @@ class Order extends Model
         'zipcode',
         'payment_id',
         'payment_mode',
+        'returned',
         'tracking_no',
         'status',
         'remark'

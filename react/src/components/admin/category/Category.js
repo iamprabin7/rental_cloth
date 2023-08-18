@@ -5,10 +5,12 @@ import swal from 'sweetalert';
 
 function Category() {
 
+    const [pricture, setPicture] = useState([]);
     const [categoryInput, setCategory] = useState({
         slug: '',
         name: '',
         descrip: '',
+        image: '',
         status: '',
         meta_title: '',
         meta_keyword: '',
@@ -20,21 +22,38 @@ function Category() {
         e.persist();
         setCategory({...categoryInput, [e.target.name]: e.target.value })
     }
+    const handleImage = (e) => {
+        setPicture({ image: e.target.files[0] });
+    }
 
     const submitCategory = (e) => {
         e.preventDefault();
 
-        const data = {
-            slug:categoryInput.slug,
-            name:categoryInput.name,
-            description:categoryInput.descrip,
-            status:categoryInput.status,
-            meta_title:categoryInput.meta_title,
-            meta_keyword:categoryInput.meta_keyword,
-            meta_descrip:categoryInput.meta_descrip,
-        }
+        const formData = new FormData();
+        formData.append('image', pricture.image);
+        formData.append('slug', categoryInput.slug);
+        formData.append('name', categoryInput.name);
+        formData.append('description', categoryInput.descrip);
 
-        axios.post(`api/store-category`, data).then(res => {
+        formData.append('meta_title', categoryInput.meta_title);
+        formData.append('meta_keyword', categoryInput.meta_keyword);
+        formData.append('meta_descrip', categoryInput.meta_descrip);
+
+        formData.append('status', categoryInput.status);
+
+        // const data = {
+        //     slug:categoryInput.slug,
+        //     name:categoryInput.name,
+        //     description:categoryInput.descrip,
+        //     image:categoryInput.image,
+        //     status:categoryInput.status,
+        //     meta_title:categoryInput.meta_title,
+        //     meta_keyword:categoryInput.meta_keyword,
+        //     meta_descrip:categoryInput.meta_descrip,
+        // }
+        // console.log(data);
+
+        axios.post(`api/store-category`, formData).then(res => {
             if(res.data.status === 200)
             {
                 e.target.reset();
@@ -55,6 +74,7 @@ function Category() {
         display_errors = [
             categoryInput.error_list.slug,
             categoryInput.error_list.name,
+            categoryInput.error_list.image,
             categoryInput.error_list.meta_title,
         ]
     }
@@ -101,6 +121,11 @@ function Category() {
                                     <label>Description</label>
                                     <textarea name="descrip" onChange={handleInput} value={categoryInput.descrip} className="form-control"></textarea>
                                 </div>
+                                <div className="col-md-8 form-group mb-3">
+                                        <label>Image</label>
+                                        <input type="file" name="image" onChange={handleImage}  className="form-control" />
+                                        <small className="text-danger">{categoryInput.error_list.image}</small>
+                                    </div>
                                 <div className="form-group mb-3">
                                     <label>Status</label>
                                     <input type="checkbox" name="status" onChange={handleInput} value={categoryInput.status} /> Status 0=shown/1=hidden
@@ -134,4 +159,3 @@ function Category() {
 }
 
 export default Category;
-

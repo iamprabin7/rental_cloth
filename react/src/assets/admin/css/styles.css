@@ -37,6 +37,12 @@
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
 }
 
+
+
+.mystyle{
+  border: 1px solid red;
+}
+
 *,
 *::before,
 *::after {

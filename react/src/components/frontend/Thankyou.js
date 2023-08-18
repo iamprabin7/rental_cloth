@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Thankyou() {
     return  (
@@ -13,8 +14,11 @@ function Thankyou() {
                 <div className="container">
                     <div class="col-md-12">
                         <div className="card text-center p-5">
-                            <h4>Thanks for purchasing with Indreni Ecommerce</h4>
+                            <h4>Thanks for renting with Poshak Sewa</h4>
+                            <Link to="/collections">Continue renting </Link>
+
                         </div>
+
                     </div>
                 </div>
             </div>

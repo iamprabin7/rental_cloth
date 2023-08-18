@@ -2,13 +2,14 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 const Sidebar = () => {
+    
     return (
-        <nav className="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+        <nav className="sb-sidenav accordion sb-sidenav-dark bg-grey" id="sidenavAccordion">
             <div className="sb-sidenav-menu">
                 <div className="nav">
-                    <div className="sb-sidenav-menu-heading">Core</div>
+                    <div className="sb-sidenav-menu-heading">Activities</div>
                     <Link className="nav-link" to="/admin/dashboard">
-                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                        <div className="sb-nav-link-icon"><i className="fas fa-house-user"></i></div>
                         Dashboard
                     </Link>
                     <Link className="nav-link" to="/admin/add-category">
@@ -21,30 +22,32 @@ const Sidebar = () => {
                     </Link>
 
 
-                    <Link className="nav-link collapsed" to="#" data-bs-toggle="collapse" data-bs-target="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct">
-                        <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
-                        Products
-                        <div className="sb-sidenav-collapse-arrow"><i className="fas fa-angle-down"></i></div>
-                    </Link>
-                    <div className="collapse" id="collapseProduct" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                        <nav className="sb-sidenav-menu-nested nav">
-                            <Link className="nav-link" to="/admin/add-product">Add Product</Link>
-                            <Link className="nav-link" to="/admin/view-product">View Product</Link>
-                        </nav>
-                    </div>
+                    
+                        
+                            <Link className="nav-link" to="/admin/add-product">
+                            <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                            Add Product</Link>
+                            <Link className="nav-link" to="/admin/view-product">
+                            <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                            View Product</Link>
+                        
 
 
-                    <Link className="nav-link" to="/admin/profile">
+                    <Link className="nav-link" to="/admin/users">
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                        Profile
+                        Users
                     </Link>
 
                     <Link className="nav-link" to="/admin/orders">
                         <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
                         Orders
                     </Link>
+                    <Link className="nav-link" to="/admin/returns">
+                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                        Returns
+                    </Link>
 
-                    <div className="sb-sidenav-menu-heading">Interface</div>
+                    {/* <div className="sb-sidenav-menu-heading">Interface</div>
                     <Link className="nav-link collapsed" to="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div className="sb-nav-link-icon"><i className="fas fa-columns"></i></div>
                         Layouts
@@ -84,12 +87,12 @@ const Sidebar = () => {
                     <Link className="nav-link" to="tables.html">
                         <div className="sb-nav-link-icon"><i className="fas fa-table"></i></div>
                         Tables
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
-            <div className="sb-sidenav-footer">
+            <div className="sb-sidenav-footer bg-dark">
                 <div className="small">Logged in as:</div>
-                Start Bootstrap
+                Poshak Sewa
             </div>
         </nav>
     );

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
 
+
 function ViewCategory()
 {
     const [loading, setLoading] = useState(true);
@@ -37,9 +38,10 @@ function ViewCategory()
         showCategoryList = category.map( (item, idx) => {
             return (
                 <div className="col-md-4" key={idx}>
-                    <div className="card">
+                    <div className='card inline-flex p-6 '>
                         <Link to={`collections/${item.slug}`}>
-                            <img src="" className="w-100" alt={item.name} />
+                            
+                            <img src={`http://localhost:8000/${item.image}`} className="object-center object-cover h-full w-full" alt={item.name} />
                         </Link>
                         <div className="card-body">
                             <Link to={`collections/${item.slug}`}>
@@ -47,7 +49,7 @@ function ViewCategory()
                             </Link>
                         </div>
                     </div>
-                </div>
+        </div>
             )
         })
     }
@@ -56,13 +58,13 @@ function ViewCategory()
     {
         return (
             <div>
-                <div className="py-3 bg-warning">
+                <div className="py-2 bg-warning">
                     <div className="container">
                         <h6>Category Page</h6>
                     </div>
                 </div>
                 
-                <div className="py-3">
+                <div className="py-4s">
                 <div className="container">
                     <div className="row">
                         {showCategoryList}

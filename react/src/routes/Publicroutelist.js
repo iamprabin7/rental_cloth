@@ -11,6 +11,9 @@ import ProductDetail from '../components/frontend/collections/ProductDetail';
 import Cart from '../components/frontend/Cart';
 import Checkout from '../components/frontend/Checkout';
 import Thankyou from '../components/frontend/Thankyou';
+import PrivacyPolicy from '../components/frontend/PrivacyPolicy';
+import TermsAndConditions from '../components/frontend/TermsandConditions';
+import Orders from '../components/frontend/Orders';
 
 const publicRoutesList = [
     { path: '/', exact: true, name: 'Home', component: Home },
@@ -26,6 +29,10 @@ const publicRoutesList = [
     { path: '/cart', exact: true, name: 'Cart', component: Cart },
     { path: '/checkout', exact: true, name: 'Checkout', component: Checkout },
     { path: '/thank-you', exact: true, name: 'Thankyou', component: Thankyou },
-];
+    { path: '/PrivacyPolicy', exact: true, name: 'PrivacyPolicy', component:PrivacyPolicy },
+    { path: '/TermsandConditions', exact: true, name: 'TermsandConditions', component:TermsAndConditions },
+    { path: '/orders', exact: true, name: 'Orders', component: Orders },
 
+    
+];
 export default publicRoutesList;

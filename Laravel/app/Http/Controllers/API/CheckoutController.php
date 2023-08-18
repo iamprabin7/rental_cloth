@@ -108,11 +108,47 @@ class CheckoutController extends Controller
             }
             else
             {
+                $user_id = auth('sanctum')->user()->id;
+                $order = new Order;
+                $order->user_id = $user_id;
+                $order->firstname = $request->firstname;
+                $order->lastname = $request->lastname;
+                $order->phone = $request->phone;
+                $order->email = $request->email;
+                $order->address = $request->address;
+                $order->city = $request->city;
+                $order->state = $request->state;
+                $order->zipcode = $request->zipcode;
+
+                $order->payment_mode = $request->payment_mode;
+                $order->payment_id = $request->payment_id;
+                $order->tracking_no = 'ecom'.rand(1111,9999);
+                $order->save();
+
+                $cart = Cart::where('user_id', $user_id)->get();
+
+                $orderitems = [];
+                foreach($cart as $item){
+                    $orderitems[] = [
+                        'product_id'=>$item->product_id,
+                        'qty'=>$item->product_qty,
+                        'price'=>$item->product->selling_price,
+                    ];
+
+                    $item->product->update([
+                        'qty'=>$item->product->qty - $item->product_qty
+                    ]);
+                }
+
+                $order->orderitems()->createMany($orderitems);
+                Cart::destroy($cart);
+
                 return response()->json([
                     'status'=>200,
-                    'message'=>'Form Validated Successfully',
+                    'message'=>'Order Placed Successfully',
                 ]);
             }
+            
         }
         else
         {
@@ -121,6 +157,7 @@ class CheckoutController extends Controller
                 'message'=> 'Login to Continue',
             ]);
         }
+
     }
 
 }

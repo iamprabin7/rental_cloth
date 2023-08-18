@@ -1,18 +1,25 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
+
 class FrontendController extends Controller
 {
     public function category()
     {
         $category = Category::where('status','0')->get();
+
+        // $category =  DB::table('categories')
+        // ->leftJoin('products', 'categories.id', '=', 'products.category_id')
+        // ->select("categories.*","products.image")->where('categories.status',0)->get();
+
+
         return response()->json([
             'status'=>200,
             'category'=>$category

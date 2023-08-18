@@ -7,7 +7,10 @@ import AddProduct from '../components/admin/product/AddProduct';
 import ViewProduct from '../components/admin/product/ViewProduct';
 import EditProduct from '../components/admin/product/EditProduct';
 import Order from '../components/admin/order/Order';
-
+import Returns from '../components/admin/returns/Returns';
+import ViewOrderItems from '../components/admin/order/ViewOrderItems';
+import Users from '../components/admin/users/Users';
+import AddUsers from '../components/admin/users/AddUsers';
 
 const routes = [
     { path: '/admin', exact: true, name: 'Admin' },
@@ -19,7 +22,12 @@ const routes = [
     { path: '/admin/view-product', exact: true, name: 'ViewProduct', component: ViewProduct },
     { path: '/admin/edit-product/:id', exact: true, name: 'EditProduct', component: EditProduct },
     { path: '/admin/profile', exact: true, name: 'Profile', component: Profile },
+    { path: '/admin/users', exact: true, name: 'Users', component: Users },
+    { path: '/admin/add-users', exact: true, name: 'Users', component: AddUsers },
     { path: '/admin/orders', exact: true, name: 'Order', component: Order },
+    { path: '/admin/returns', exact: true, name: 'Returns', component: Returns },
+    { path: '/admin/view-orders/:orderId', exact: true, name: 'ViewOrderItems', component: ViewOrderItems },
+
 ];
 
 export default routes;

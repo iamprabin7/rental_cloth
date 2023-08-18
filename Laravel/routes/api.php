@@ -9,6 +9,8 @@ use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\CheckoutController;
 use App\Http\Controllers\API\FrontendController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\API\ReturnsController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
@@ -25,6 +27,8 @@ Route::delete('delete-cartitem/{cart_id}', [CartController::class, 'deleteCartit
 Route::post('validate-order', [CheckoutController::class, 'validateOrder']);
 Route::post('place-order', [CheckoutController::class, 'placeorder']);
 
+Route::get('myorders', [OrderController::class, 'viewmyorders']);
+Route::post('add-to-return', [ReturnsController::class, 'addtoreturn']);
 
 
 Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
@@ -41,19 +45,41 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
     Route::delete('delete-category/{id}', [CategoryController::class, 'destroy']);
     Route::get('all-category', [CategoryController::class, 'allcategory']);
 
+     // Users
+     Route::get('view-users', [UsersController::class, 'index']);
+     Route::post('store-users', [UsersController::class, 'store']);
+     Route::put('appoint-admin/{id}', [UsersController::class, 'appointAdmin']);
+     Route::put('remove-admin/{id}', [UsersController::class, 'removeAdmin']);
+     Route::put('update-users/{id}', [UsersController::class, 'update']);
+     Route::delete('delete-users/{id}', [UsersController::class, 'destroy']);
+     Route::get('all-users', [UsersController::class, 'allusers']);
+
+
     // Orders
     Route::get('admin/orders', [OrderController::class, 'index']);
+    Route::get('admin/view-orders/{orderId}', [OrderController::class, 'viewitems']);
+
+    Route::get('/total-sales', [OrderController::class, 'getTotalSales']);
+     // Returns
+     Route::get('admin/returns', [ReturnsController::class, 'index']);
+     Route::post('admin/approve-return', [ReturnsController::class, 'approveReturn']);
 
     // Products
     Route::post('store-product', [ProductController::class, 'store']);
     Route::get('view-product', [ProductController::class, 'index']);
     Route::get('edit-product/{id}', [ProductController::class, 'edit']);
     Route::post('update-product/{id}', [ProductController::class, 'update']);
+    Route::delete('delete-product/{id}', [ProductController::class, 'destroy']);
+
+    //For dashboard
+    Route::get('/getUsersTotalPrice', [OrderController::class, 'getUsersTotalPrice']);
+
+
 });
 
 
 Route::middleware(['auth:sanctum'])->group(function () {
-
+    Route::get('profile', [AuthController::class, 'getProfile']);
     Route::post('logout', [AuthController::class, 'logout']);
 
 });

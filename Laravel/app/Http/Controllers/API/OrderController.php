@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\Orderitems;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -15,5 +16,63 @@ class OrderController extends Controller
             'status' => 200,
             'orders' => $orders,
         ]);
+    }
+
+    public function viewitems($orderId)
+    {
+        // Retrieve order items from the database using the order ID
+        $orderItems = Orderitems::where('order_id', $orderId)
+        ->join('products', 'orderitems.product_id', '=', 'products.id')
+        ->select('orderitems.*', 'products.name as product_name')
+        ->get();
+
+        // Return the order items as a JSON response
+        return response()->json([
+            'status' => 200,
+            'data' => [
+                'orderItems' => $orderItems
+            ]
+        ]);
+    }
+
+    public function viewmyorders()
+{
+    if(auth('sanctum')->check())
+    {
+        $user_id = auth('sanctum')->user()->id;
+        $orderitems = Order::where('user_id', $user_id)
+            ->where('returned', '=', 0)
+            ->join('users', 'orders.user_id', '=', 'users.id')
+            ->join('orderitems', 'orders.id', '=', 'orderitems.order_id')
+            ->join('products', 'orderitems.product_id', '=', 'products.id')
+            ->select('orders.*', 'users.name as user_name', 'products.id as product_id', 'products.name as product_name', 'products.image as product_image')
+            ->get();
+
+        return response()->json([
+            'status' => 200,
+            'orders' => $orderitems,
+        ]);
+    }
+    else
+    {
+        return response()->json([
+            'status' => 401,
+            'message' => 'Login to View My Orders Data',
+        ]);
+    }
+}
+public function getTotalSales()
+    {
+        $orderItems = Orderitems::all();
+
+        $totalQty = $orderItems->sum('qty');
+        $totalPrice = $orderItems->sum(function ($item) {
+            return $item->qty * $item->price;
+        });
+
+        return [
+            'total_qty' => $totalQty,
+            'total_price' => $totalPrice,
+        ];
     }
 }

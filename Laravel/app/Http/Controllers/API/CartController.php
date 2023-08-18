@@ -81,26 +81,40 @@ class CartController extends Controller
 
     public function updatequantity($cart_id, $scope)
     {
-        if(auth('sanctum')->check())
-        {
+        if (auth('sanctum')->check()) {
             $user_id = auth('sanctum')->user()->id;
-            $cartitem = Cart::where('id',$cart_id)->where('user_id',$user_id)->first();
-            if($scope == "inc"){
-                $cartitem->product_qty += 1;
-            }else if($scope == "dec"){
-                $cartitem->product_qty -= 1;
+            $cartitem = Cart::where('id', $cart_id)->where('user_id', $user_id)->first();
+
+            if (!$cartitem) {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Cart item not found',
+                ]);
             }
+
+            if ($scope == "inc") {
+                $cartitem->product_qty += 1;
+            } else if ($scope == "dec") {
+                if ($cartitem->product_qty > 1) {
+                    $cartitem->product_qty -= 1;
+                } else {
+                    return response()->json([
+                        'status' => 400,
+                        'message' => 'Quantity cannot go below 0',
+                    ]);
+                }
+            }
+
             $cartitem->update();
+
             return response()->json([
-                'status'=> 200,
-                'message'=> 'Quantity Updated',
+                'status' => 200,
+                'message' => 'Quantity Updated',
             ]);
-        }
-        else
-        {
+        } else {
             return response()->json([
-                'status'=> 401,
-                'message'=> 'Login to continue',
+                'status' => 401,
+                'message' => 'Login to continue',
             ]);
         }
     }

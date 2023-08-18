@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 function Order()
 {
@@ -44,7 +44,7 @@ function Order()
                     <td>{item.phone}</td>
                     <td>{item.email}</td>
                     <td>
-                        <Link to={`view-order/${item.id}`} className="btn btn-success btn-sm">View</Link>
+                        <RouterLink to={`/admin/view-orders/${item.id}`} className="btn btn-success btn-sm">View</RouterLink>
                     </td>
                 </tr>
             )

@@ -1,21 +1,35 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useHistory } from 'react-router-dom';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+import KhaltiCheckout from 'khalti-checkout-web';
+import config from '../Khalti/khaltiConfig';
+import statesCitiesData from './nepal_states_cities.json';
 
-
-function Checkout()
-{
+function Checkout() {
 
     const history = useHistory();
     if(!localStorage.getItem('auth_token')){
         history.push('/');
         swal("Warning","Login to goto Cart Page","error");
     }
-    
+    const _onSelect = (option) => {
+        // Handle the selected option
+        console.log(option);
+      };
+    const options = [
+        '1 day', '3 days', '5 days','7 days',
+      ];
+    const defaultOption = options[0];
+
     const [loading, setLoading] = useState(true);
     const [cart, setCart] = useState([]);
-    var totalCartPrice = 0;
+   
+    const totalCartPrice = cart.reduce((total, item) => {
+      return total + item.product.selling_price * item.product_qty;
+    }, 0);
 
     const [checkoutInput, setCheckoutInput] = useState({
         firstname: '',
@@ -54,6 +68,49 @@ function Checkout()
         };
     }, [history]);
 
+    var checkout = new KhaltiCheckout({
+        ...config,
+
+        eventHandler: {
+            onSuccess(payload){
+            axios.post(`/api/validate-order`,{
+                firstname: checkoutInput.firstname,
+                lastname: checkoutInput.lastname,
+                phone: checkoutInput.phone,
+                email: checkoutInput.email,
+                address: checkoutInput.address,
+                city: checkoutInput.city,
+                state: checkoutInput.state,
+                zipcode: checkoutInput.zipcode,
+                payment_mode: "Khalti",
+                payment_id: '',
+            } )
+          .then((res) => {
+            if(res.data.status === 200)
+                    {
+                        swal("Order Placed Successfully",res.data.message,"success");
+                        setError([]);
+                        history.push('/thank-you');
+                    }
+                    else if(res.data.status === 422)
+                    {
+                        swal("All fields are mandetory","","error");
+                        setError(res.data.errors);
+                    }
+          });
+      },
+      // onError handler is optional
+      onError(error) {
+
+        // handle errors
+        console.log(error);
+      },
+           
+        },
+
+    });
+
+
     const handleInput = (e) => {
         e.persist();
         setCheckoutInput({...checkoutInput, [e.target.name]: e.target.value });
@@ -61,7 +118,74 @@ function Checkout()
 
     const submitOrder = (e, payment_mode) => {
         e.preventDefault();
+    
+        const errors = {};
+    
+        // Validate first name
+        if (!checkoutInput.firstname) {
+            errors.firstname = 'First name is required.';
+        } else if (!/^[a-zA-Z]+$/i.test(checkoutInput.firstname)) {
+            errors.firstname = 'First name should contain only letters.';
+        }
+    
+        // Validate last name
+        if (!checkoutInput.lastname) {
+            errors.lastname = 'Last name is required.';
+        } else if (!/^[a-zA-Z]+$/i.test(checkoutInput.lastname)) {
+            errors.lastname = 'Last name should contain only letters.';
+        }
+    
+ // Validate phone number
+if (!checkoutInput.phone) {
+    errors.phone = 'Phone number is required.';
+} else {
+    // Remove any non-numeric characters from the input
+    const numericInput = checkoutInput.phone.replace(/\D/g, '');
 
+    // Validate phone number
+    if (!checkoutInput.phone) {
+        errors.phone = 'Phone number is required.';
+    } else if (!/^\d{10}$/.test(checkoutInput.phone)) {
+        errors.phone = 'Phone number should be a 10-digit number.';
+    }
+}
+
+
+
+    
+        // Validate email address
+        if (!checkoutInput.email) {
+            errors.email = 'Email address is required.';
+        } else if (
+            !/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(
+                checkoutInput.email
+            )
+        ) {
+            errors.email = 'Invalid email address.';
+        }
+
+        // Validate zip code
+    if (!checkoutInput.zipcode) {
+        errors.zipcode = 'Zip code is required.';
+    } else if (!/^\d{5}$/.test(checkoutInput.zipcode)) {
+        errors.zipcode = 'Zip code should be a 5-digit number.';
+    }
+
+ // Validate address
+ if (!checkoutInput.address.trim()) {
+    errors.address = 'Address is required.';
+}
+
+     
+
+    
+        setError(errors);
+    
+        // Check if there are any errors
+        if (Object.keys(errors).length > 0) {
+            return;
+        }
+    
         var data = {
             firstname: checkoutInput.firstname,
             lastname: checkoutInput.lastname,
@@ -73,7 +197,10 @@ function Checkout()
             zipcode: checkoutInput.zipcode,
             payment_mode: payment_mode,
             payment_id: '',
-        }
+        };
+    
+
+        // minimum transaction amount must be 10, i.e 1000 in paisa.
 
         switch (payment_mode) {
             case 'cod':
@@ -92,9 +219,12 @@ function Checkout()
                 });
                 break;
 
+                
             
 
-            // case 'payonline':
+            case 'Khalti':
+                checkout.show({ amount: parseInt(totalCartPrice * 100) });
+
             //     axios.post(`/api/validate-order`, data).then(res=>{
             //         if(res.data.status === 200)
             //         {
@@ -108,7 +238,7 @@ function Checkout()
             //             setError(res.data.errors);
             //         }
             //     });
-            //     break;
+                break;
         
             default:
                 break;
@@ -138,84 +268,123 @@ function Checkout()
                             <div className="col-md-6">
                                 <div className="form-group mb-3">
                                     <label> First Name</label>
-                                    <input type="text" name="firstname" onChange={handleInput} value={checkoutInput.firstname} className="form-control" />
-                                    <small className="text-danger">{error.firstname}</small>
+                                    <input type="text" name="firstname" onChange={handleInput} value={checkoutInput.firstname} className={`form-control ${error.firstname ? 'is-invalid' : ''}`} placeholder="John" />
+                                    {error.firstname && (<small className="text-danger">{error.firstname}</small>)}
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="form-group mb-3">
                                     <label> Last Name</label>
-                                    <input type="text" name="lastname" onChange={handleInput} value={checkoutInput.lastname} className="form-control" />
-                                    <small className="text-danger">{error.lastname}</small>
+                                    <input type="text" name="lastname" onChange={handleInput} value={checkoutInput.lastname} className={`form-control ${error.lastname ? 'is-invalid' : ''}`} placeholder="Cena" />
+                                    {error.lastname && (<small className="text-danger">{error.lastname}</small>)}
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="form-group mb-3">
                                     <label> Phone Number</label>
-                                    <input type="number" name="phone" onChange={handleInput} value={checkoutInput.phone} className="form-control" />
-                                    <small className="text-danger">{error.phone}</small>
+                                    <input type="text"  name="phone" onChange={handleInput} value={checkoutInput.phone} className={`form-control ${error.phone ? 'is-invalid' : ''}`} placeholder="98XXXXXXXX" />
+                                    {error.phone && (<small className="text-danger">{error.phone}</small>)}
                                 </div>
                             </div>
                             <div className="col-md-6">
                                 <div className="form-group mb-3">
                                     <label> Email Address</label>
-                                    <input type="email" name="email" onChange={handleInput} value={checkoutInput.email} className="form-control" />
-                                    <small className="text-danger">{error.email}</small>
+                                    <input type="email" name="email" onChange={handleInput} value={checkoutInput.email} className={`form-control ${error.email ? 'is-invalid' : ''}`} placeholder="john.cen@example.com" />
+                                    {error.email && (<small className="text-danger">{error.email}</small>)}
                                 </div>
                             </div>
                             <div className="col-md-12">
-                                <div className="form-group mb-3">
-                                    <label> Full Address</label>
-                                    <textarea rows="3" name="address" onChange={handleInput} value={checkoutInput.address} className="form-control"></textarea>
-                                    <small className="text-danger">{error.address}</small>
-                                </div>
-                            </div>
+    <div className="form-group mb-3">
+        <label>Full Address</label>
+        <textarea
+            rows="3"
+            name="address"
+            onChange={handleInput}
+            value={checkoutInput.address}
+            className={`form-control ${error.address ? 'is-invalid' : ''}`}
+        />
+        {error.address && <small className="text-danger">{error.address}</small>}
+    </div>
+</div>
                             <div className="col-md-4">
-                                <div className="form-group mb-3">
-                                    <label>City</label>
-                                    <input type="text" name="city" onChange={handleInput} value={checkoutInput.city} className="form-control" />
-                                    <small className="text-danger">{error.city}</small>
-                                </div>
-                            </div>
-                            <div className="col-md-4">
-                                <div className="form-group mb-3">
-                                    <label>State</label>
-                                    <input type="text" name="state" onChange={handleInput} value={checkoutInput.state} className="form-control" />
-                                    <small className="text-danger">{error.state}</small>
-                                </div>
-                            </div>
+  <div className="form-group mb-3">
+    <label>State</label>
+    <select
+      name="state"
+      onChange={handleInput}
+      value={checkoutInput.state}
+      className={`form-control ${error.state ? 'is-invalid' : ''}`}
+    >
+      <option value="">Select State</option>
+      {statesCitiesData.map((stateData, index) => (
+        <option key={index} value={stateData.name}>
+          {stateData.name}
+        </option>
+      ))}
+    </select>
+    {error.state && <small className="text-danger">{error.state}</small>}
+  </div>
+</div>
+
+<div className="col-md-4">
+  <div className="form-group mb-3">
+    <label>City</label>
+    <select
+      name="city"
+      onChange={handleInput}
+      value={checkoutInput.city}
+      className={`form-control ${error.city ? 'is-invalid' : ''}`}
+    >
+      <option value="">Select City</option>
+      {checkoutInput.state &&
+        statesCitiesData
+          .find((stateData) => stateData.name === checkoutInput.state)
+          .cities.map((city, index) => (
+            <option key={index} value={city}>
+              {city}
+            </option>
+          ))}
+    </select>
+    {error.city && <small className="text-danger">{error.city}</small>}
+  </div>
+</div>
+
                             <div className="col-md-4">
                                 <div className="form-group mb-3">
                                     <label>Zip Code</label>
-                                    <input type="text" name="zipcode" onChange={handleInput} value={checkoutInput.zipcode} className="form-control" />
-                                    <small className="text-danger">{error.zipcode}</small>
+                                    <input type="text" name="zipcode" onChange={handleInput} value={checkoutInput.zipcode} className={`form-control ${error.zipcode ? 'is-invalid' : ''}`} />
+                                    {error.zipcode && (<small className="text-danger">{error.zipcode}</small>)}
                                 </div>
                             </div>
+                            
+                            
                             <div className="col-md-12">
-                                <div className="form-group text-end">
-                                    <button type="button" className="btn btn-primary mx-1" onClick={ (e) => submitOrder(e, 'cod') }>Place Order</button>
-                                   
-                                </div>
-                            </div>
+    <div className="form-group text-end">
+        <button type="button" className="btn btn-primary mx-1" onClick={(e) => submitOrder(e, 'cod')}>Cash on delivery</button>
+    </div>
+    <div className="form-group text-end" style={{ marginTop: '10px' }}>
+        <button type="button" className="btn btn-primary mx-1" onClick={(e) => submitOrder(e, 'Khalti')}>Pay by Khalti</button>
+    </div>
+</div>
+
                         </div>
 
                     </div>
                 </div>
             </div>
-
             <div className="col-md-5">
                 <table className="table table-bordered">
                     <thead>
                         <tr>
                             <th width="50%">Product</th>
                             <th>Price</th>
-                            <th>Qty</th>
+                            <th>Days to rent</th>
                             <th>Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         {cart.map( (item, idx) => {
-                            totalCartPrice += item.product.selling_price * item.product_qty;
+                           
                             return (
                                 <tr key={idx}>
                                     <td>{item.product.name}</td>
@@ -261,7 +430,7 @@ function Checkout()
                    {checkout_HTML}
                 </div>
             </div>
-
+            
         </div>
     )
 }
@@ -269,4 +438,3 @@ function Checkout()
 
 
 export default Checkout;
-

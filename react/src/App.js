@@ -1,6 +1,5 @@
 import React from 'react';
 import {BrowserRouter as Router, Switch} from 'react-router-dom';
-
 // import MasterLayout from './layouts/admin/MasterLayout';
 import AdminPrivateRoute from './AdminPrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -29,7 +28,8 @@ function App() {
 
             <AdminPrivateRoute path="/admin" name="Admin" />
 
-            <PublicRoute path="/" name="Home" />
+            <PublicRoute path="/" name="Home" 
+            />
 
             {/* <Route path="/login">
               {localStorage.getItem('auth_token') ? <Redirect to='/' /> : <Login />}

@@ -170,6 +170,34 @@ class ProductController extends Controller
                 ]);
             }
         }
+
+    }
+    public function destroy($id)
+    {
+        $product = Product::find($id);
+        if($product)
+        {
+            $product->delete();
+            return response()->json([
+                'status'=>200,
+                'message'=>'Product Deleted Successfully',
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=>404,
+                'message'=>'No Product ID Found',
+            ]);
+        }
+    }
+    public function getAvailableQuantity(Request $request)
+    {
+        $productsQuantity = Product::select('id', 'name', DB::raw('SUM(qty) as total_quantity'))
+            ->groupBy('id', 'name')
+            ->get();
+
+        return response()->json($productsQuantity);
     }
 
 }

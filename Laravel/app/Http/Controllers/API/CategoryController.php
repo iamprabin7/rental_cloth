@@ -54,6 +54,9 @@ class CategoryController extends Controller
             'meta_title'=>'required|max:191',
             'slug'=>'required|max:191',
             'name'=>'required|max:191',
+            'image'=>'required|image|mimes:jpeg,png,jpg|max:2048',
+
+
         ]);
 
         if($validator->fails())
@@ -72,6 +75,14 @@ class CategoryController extends Controller
             $category->slug = $request->input('slug');
             $category->name = $request->input('name');
             $category->description = $request->input('description');
+            if($request->hasFile('image'))
+            {
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() .'.'.$extension;
+                $file->move('uploads/category/', $filename);
+                $category->image = 'uploads/category/'.$filename;
+            }
             $category->status = $request->input('status') == true ? '1':'0';
             $category->save();
             return response()->json([
@@ -108,6 +119,14 @@ class CategoryController extends Controller
                 $category->slug = $request->input('slug');
                 $category->name = $request->input('name');
                 $category->description = $request->input('description');
+                if($request->hasFile('image'))
+            {
+                $file = $request->file('image');
+                $extension = $file->getClientOriginalExtension();
+                $filename = time() .'.'.$extension;
+                $file->move('uploads/category/', $filename);
+                $category->image = 'uploads/category/'.$filename;
+            }
                 $category->status = $request->input('status') == true ? '1':'0';
                 $category->save();
                 return response()->json([
