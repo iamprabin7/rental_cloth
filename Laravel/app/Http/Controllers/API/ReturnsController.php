@@ -13,7 +13,7 @@ class ReturnsController extends Controller
     public function index()
     {
         //checking returned value 0 or not
-        $returns = Returns::where('returned', '=', 0)->get();
+        $returns = Returns::get();
         return response()->json([
             'status' => 200,
             'returns' => $returns,
@@ -84,9 +84,9 @@ class ReturnsController extends Controller
             'status' => 201,
             'message' => 'Return Initiated.',
         ]);
-    }  catch (\Exception $e) {
+    }  catch (Exception $e) {
         // Log the exception for debugging purposes
-        \Log::error('Error while adding return: ' . $e->getMessage());
+        Log::error('Error while adding return: ' . $e->getMessage());
 
         // Return a more descriptive error response
         return response()->json([

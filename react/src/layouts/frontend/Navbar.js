@@ -18,6 +18,7 @@ function Navbar() {
     });
   };
 
+
   let authButtons = null;
   if (!localStorage.getItem("auth_token")) {
     authButtons = (
@@ -49,8 +50,8 @@ function Navbar() {
         type="button"
         onClick={logoutSubmit}
         className="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium"
-       
-        
+
+
       >
         Logout
       </button>
@@ -103,12 +104,13 @@ function Navbar() {
             <NavLink className="navbar-brand" to="/">
               <img
                 className="block h-30 w-30"
-                src="poshaksewalogo.png"
+                src="cloth.png"
                 alt="Your Company"
                 style={{ height: "13rem" }}
               />
             </NavLink>
           </div>
+
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4">

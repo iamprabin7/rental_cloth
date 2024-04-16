@@ -30,6 +30,9 @@ Route::post('place-order', [CheckoutController::class, 'placeorder']);
 Route::get('myorders', [OrderController::class, 'viewmyorders']);
 Route::post('add-to-return', [ReturnsController::class, 'addtoreturn']);
 
+// Fetch related products based on category
+Route::get('relatedproducts/{categoryId}', [ProductController::class, 'relatedProducts']);
+
 
 Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
 
@@ -58,6 +61,10 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
     // Orders
     Route::get('admin/orders', [OrderController::class, 'index']);
     Route::get('admin/view-orders/{orderId}', [OrderController::class, 'viewitems']);
+    Route::delete('admin/orders/cancel/{orderId}', [OrderController::class, 'cancelOrder']);
+
+
+
 
     Route::get('/total-sales', [OrderController::class, 'getTotalSales']);
      // Returns
@@ -70,6 +77,7 @@ Route::middleware(['auth:sanctum','isAPIAdmin'])->group(function () {
     Route::get('edit-product/{id}', [ProductController::class, 'edit']);
     Route::post('update-product/{id}', [ProductController::class, 'update']);
     Route::delete('delete-product/{id}', [ProductController::class, 'destroy']);
+
 
     //For dashboard
     Route::get('/getUsersTotalPrice', [OrderController::class, 'getUsersTotalPrice']);

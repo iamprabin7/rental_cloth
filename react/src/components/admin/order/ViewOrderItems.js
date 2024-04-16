@@ -12,6 +12,7 @@ function ViewOrderItems() {
     document.title = 'Order Items';
 
     axios.get(`/api/admin/view-orders/${orderId}`).then(res => {
+      
       if (isMounted) {
         if (res.data && res.data.status === 200) {
           setOrderItems(res.data.data?.orderItems || []);

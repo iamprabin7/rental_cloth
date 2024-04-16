@@ -16,6 +16,7 @@ function ViewCategory() {
             {
                 if(res.status === 200)
                 {
+
                     setCategorylist(res.data.category)
                     setLoading(false);
                 }

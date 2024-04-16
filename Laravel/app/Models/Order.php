@@ -31,5 +31,10 @@ class Order extends Model
     {
         return $this->hasMany(Orderitems::class, 'order_id', 'id');
     }
+    
+    public function returned()
+    {
+        return $this->hasOne(Returns::class, 'order_id', 'id');
+    }
 
 }

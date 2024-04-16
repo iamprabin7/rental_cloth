@@ -80,6 +80,8 @@ class ProductController extends Controller
         }
     }
 
+
+
     public function edit($id)
     {
         $product = Product::find($id);
@@ -198,6 +200,18 @@ class ProductController extends Controller
             ->get();
 
         return response()->json($productsQuantity);
+    }
+    public function relatedProducts($categoryId)
+    {
+        $relatedProducts = Product::where('category_id', $categoryId)
+            ->inRandomOrder() // You can adjust how related products are fetched
+            ->limit(3) // Adjust the number of related products as needed
+            ->get();
+
+        return response()->json([
+            'status' => 200,
+            'products' => $relatedProducts,
+        ]);
     }
 
 }

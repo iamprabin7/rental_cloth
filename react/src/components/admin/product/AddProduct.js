@@ -209,7 +209,7 @@ function AddProduct()
                                         <input type="file" name="image" onChange={handleImage}  className="form-control" />
                                         <small className="text-danger">{errorlist.image}</small>
                                     </div>
-                                    <div className="col-md-4 form-group mb-3">
+                                    {/* <div className="col-md-4 form-group mb-3">
                                         <label>Featured (checked=shown)</label>
                                         <input type="checkbox" name="featured" onChange={handleInput} value={productInput.featured}  className="w-50 h-50" />
                                     </div>
@@ -220,7 +220,7 @@ function AddProduct()
                                     <div className="col-md-4 form-group mb-3">
                                         <label>Status (checked=Hidden)</label>
                                         <input type="checkbox" name="status" onChange={handleInput} value={productInput.status}  className="w-50 h-50" />
-                                    </div>
+                                    </div> */}
 
                                 </div>
 

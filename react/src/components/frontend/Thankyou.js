@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Thankyou() {
-    return  (
+    return (
         <div>
             <div className="py-3 bg-warning">
                 <div className="container">
@@ -14,7 +14,7 @@ function Thankyou() {
                 <div className="container">
                     <div class="col-md-12">
                         <div className="card text-center p-5">
-                            <h4>Thanks for renting with Poshak Sewa</h4>
+                            <h4>Thanks for renting with Cloth Rental</h4>
                             <Link to="/collections">Continue renting </Link>
 
                         </div>

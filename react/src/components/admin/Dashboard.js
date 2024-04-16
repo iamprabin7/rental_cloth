@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { Link } from "react-router-dom";
 import swal from 'sweetalert';
+import  PieChart  from './PieChart';
+
 
 function Dashboard() {
   
@@ -129,10 +131,10 @@ function Dashboard() {
                 ))}
               </ul>
             </div> */}
+            <div><PieChart/></div>
             <div className="flex items-center justify-center rounded bg-gray-50 h-28">
-              <h1>User Profile</h1>
-              <p>Name: {user.name}</p>
-              <p>Email: {user.email}</p>
+              
+              <h2>User Profile :  {user.name} </h2>
             </div>
            
             <div className="grid gap-4 grid-cols-2">

@@ -50,6 +50,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'meta_title'=>'required|max:191',
             'slug'=>'required|max:191',
@@ -68,6 +69,7 @@ class CategoryController extends Controller
         }
         else
         {
+
             $category = new Category;
             $category->meta_title = $request->input('meta_title');
             $category->meta_keyword = $request->input('meta_keyword');
@@ -83,8 +85,9 @@ class CategoryController extends Controller
                 $file->move('uploads/category/', $filename);
                 $category->image = 'uploads/category/'.$filename;
             }
-            $category->status = $request->input('status') == true ? '1':'0';
+            $category->status = $request->input('status')===true  ? 1:0;
             $category->save();
+
             return response()->json([
                 'status'=>200,
                 'message'=>'Category Added Successfully',

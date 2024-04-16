@@ -1,8 +1,8 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
-    
+
     return (
         <nav className="sb-sidenav accordion sb-sidenav-dark bg-grey" id="sidenavAccordion">
             <div className="sb-sidenav-menu">
@@ -22,15 +22,15 @@ const Sidebar = () => {
                     </Link>
 
 
-                    
-                        
-                            <Link className="nav-link" to="/admin/add-product">
-                            <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                            Add Product</Link>
-                            <Link className="nav-link" to="/admin/view-product">
-                            <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
-                            View Product</Link>
-                        
+
+
+                    <Link className="nav-link" to="/admin/add-product">
+                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                        Add Product</Link>
+                    <Link className="nav-link" to="/admin/view-product">
+                        <div className="sb-nav-link-icon"><i className="fas fa-tachometer-alt"></i></div>
+                        View Product</Link>
+
 
 
                     <Link className="nav-link" to="/admin/users">
@@ -92,7 +92,7 @@ const Sidebar = () => {
             </div>
             <div className="sb-sidenav-footer bg-dark">
                 <div className="small">Logged in as:</div>
-                Poshak Sewa
+                Cloth Rental
             </div>
         </nav>
     );

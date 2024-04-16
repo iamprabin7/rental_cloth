@@ -8,11 +8,11 @@ const About = () => {
             <div className="flex flex-col lg:flex-row justify-between gap-8">
                 <div className="w-full lg:w-5/12 flex flex-col justify-center">
                     <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">About Us</h1>
-                    <p className="font-normal text-base leading-6 text-gray-700 ">Welcome to Poshak Sewa, the premier destination for all your clothing rental needs. We pride ourselves on offering a seamless and stylish rental experience that combines convenience, affordability, and sustainability.</p>
-                    <p className="font-normal text-base leading-6 text-gray-700 ">At Poshak Sewa, we understand that fashion is more than just clothing. it's an expression of your unique personality and style. We believe that everyone deserves access to a diverse and ever-evolving wardrobe that allows them to feel confident and empowered in every occasion.</p>
+                    <p className="font-normal text-base leading-6 text-gray-700 ">Welcome to Cloth Rental, the premier destination for all your clothing rental needs. We pride ourselves on offering a seamless and stylish rental experience that combines convenience, affordability, and sustainability.</p>
+                    <p className="font-normal text-base leading-6 text-gray-700 ">At Cloth Rental, we understand that fashion is more than just clothing. it's an expression of your unique personality and style. We believe that everyone deserves access to a diverse and ever-evolving wardrobe that allows them to feel confident and empowered in every occasion.</p>
                     <p className="font-normal text-base leading-6 text-gray-700 ">Our extensive collection showcases a carefully curated selection of high-quality garments from top designers and sought-after brands. From trendy statement pieces to timeless classics, we offer a wide range of options to cater to your individual taste and preferences. Whether you're attending a special event, a business function, or simply looking to refresh your everyday wardrobe, we've got you covered.
 </p>
-<p className="font-normal text-base leading-6 text-red-600">Thank you for choosing Poshak Sewa. Embrace your individuality and celebrate your style with us.</p>
+<p className="font-normal text-base leading-6 text-red-600">Thank you for choosing Cloth Rental. Embrace your individuality and celebrate your style with us.</p>
                 </div>
                 <div className="w-full lg:w-8/12 ">
                     <img className="w-full h-full" src="https://i.ibb.co/FhgPJt8/Rectangle-116.png" alt="A group of People" />
@@ -22,11 +22,11 @@ const About = () => {
             <div className="flex lg:flex-row flex-col justify-between gap-8 pt-12">
                 <div className="w-full lg:w-5/12 flex flex-col justify-center">
                     <h1 className="text-3xl lg:text-4xl font-bold leading-9 text-gray-800 pb-4">Our Story</h1>
-                    <p className="font-normal text-base leading-6 text-gray-600 ">At Poshak Sewa, our story began with a passion for fashion and a vision to revolutionize the way people experience clothing. We embarked on a mission to offer a unique solution that merges style, convenience, and sustainability</p>
+                    <p className="font-normal text-base leading-6 text-gray-600 ">At Cloth Rental, our story began with a passion for fashion and a vision to revolutionize the way people experience clothing. We embarked on a mission to offer a unique solution that merges style, convenience, and sustainability</p>
 
-<p className="font-normal text-base leading-6 text-gray-600 ">From humble beginnings, we built Poshak Sewa into the premier destination it is today. Our dedicated team worked tirelessly to curate an extensive collection of high-quality garments from top designers and brands, ensuring a diverse selection that caters to different tastes and styles.
+<p className="font-normal text-base leading-6 text-gray-600 ">From humble beginnings, we built Cloth Rental into the premier destination it is today. Our dedicated team worked tirelessly to curate an extensive collection of high-quality garments from top designers and brands, ensuring a diverse selection that caters to different tastes and styles.
 </p>
-<p className="font-normal text-base leading-6 text-gray-600 ">As we continue to grow and evolve, we remain dedicated to providing you with a wardrobe that reflects your individuality and empowers you to embrace your personal style. Join us at Poshak Sewa and be a part of the fashion revolution.
+<p className="font-normal text-base leading-6 text-gray-600 ">As we continue to grow and evolve, we remain dedicated to providing you with a wardrobe that reflects your individuality and empowers you to embrace your personal style. Join us at Cloth Rental and be a part of the fashion revolution.
 </p>
 
                 </div>

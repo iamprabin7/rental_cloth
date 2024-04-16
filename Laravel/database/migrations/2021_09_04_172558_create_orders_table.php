@@ -28,6 +28,7 @@ class CreateOrdersTable extends Migration
             $table->string('payment_mode');
             $table->string('tracking_no');
             $table->tinyInteger('status')->default('0');
+            $table->boolean('returned');
             $table->text('remark')->nullable();
             $table->timestamps();
         });

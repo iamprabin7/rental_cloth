@@ -35,7 +35,7 @@ function ViewProduct(props) {
       isMounted = false;
     };
   }, [props.match.params.slug, history]);
-
+// search algorithm
   const handleSearch = (event) => {
     const query = event.target.value.toLowerCase();
     setSearchQuery(query);
@@ -60,10 +60,15 @@ function ViewProduct(props) {
       showProductList = filteredProducts
         .sort((a, b) => a.name.localeCompare(b.name))
         .map((item, idx) => (
-          <div className="col-md-3" key={idx}>
-            <div className="card">
+          <div className="col-md-3 mb-4" key={idx}> {/* Added mb-4 for bottom margin */}
+            <div className="card h-100">
               <Link to={`/collections/${item.category.slug}/${item.slug}`}>
-                <img src={`http://localhost:8000/${item.image}`} className="w-100" alt={item.name} />
+                <img
+                  src={`http://localhost:8000/${item.image}`}
+                  className="card-img-top"
+                  alt={item.name}
+                  style={{ height: '400px', objectFit: 'cover' }} // Set fixed dimensions and cover image
+                />
               </Link>
               <div className="card-body">
                 <Link to={`/collections/${item.category.slug}/${item.slug}`}>
@@ -82,31 +87,30 @@ function ViewProduct(props) {
     }
 
     return (
-        <div className="py-3">
-          <div className="container">
-            <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '2rem' }}>
-              <input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={handleSearch}
-                style={{
-                  padding: '0.3rem',
-                  border: '4px solid #ccc',
-                  borderRadius: '4px',
-                  outline: 'none',
-                  width: '25%', // Adjust the width as needed
-                  cursor: 'text', // Set the cursor to text cursor
-                }}
-              />
-            </div>
-            <div className="row">
-              {showProductList}
-            </div>
+      <div className="py-3">
+        <div className="container">
+          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', marginBottom: '2rem' }}>
+            <input
+              type="text"
+              placeholder="Search..."
+              value={searchQuery}
+              onChange={handleSearch}
+              style={{
+                padding: '0.3rem',
+                border: '4px solid #ccc',
+                borderRadius: '4px',
+                outline: 'none',
+                width: '25%', // Adjust the width as needed
+                cursor: 'text', // Set the cursor to text cursor
+              }}
+            />
+          </div>
+          <div className="row">
+            {showProductList}
           </div>
         </div>
-      );
-      
+      </div>
+    );
   }
 }
 

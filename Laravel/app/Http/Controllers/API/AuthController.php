@@ -29,7 +29,7 @@ class AuthController extends Controller
             $user = User::create([
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'password'=>Hash::make($request->password),
+                'password'=>Hash::make($request->password), //hashing algorithm
             ]);
 
             $token = $user->createToken($user->email.'_Token')->plainTextToken;
@@ -70,6 +70,7 @@ class AuthController extends Controller
             }
             else
             {
+                
                 if($user->role_as == 1) //1= Admin
                 {
                     $role = 'admin';

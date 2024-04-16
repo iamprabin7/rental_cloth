@@ -29,6 +29,7 @@ function Orders(props) {
 
         // Fetch the user's orders
         axios.get(`/api/myorders`).then(res => {
+            console.log('res',res);
             if (isMounted) {
                 if (res.data.status === 200) {
                     setOrders(res.data.orders); // Update the state with the correct data

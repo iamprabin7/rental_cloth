@@ -10,7 +10,7 @@ function TermsAndConditions() {
         <div className="content">
           <h3>Introduction</h3>
           <p>
-            These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Poshak Sewa accessible at www.poshaksewa.com.
+            These Website Standard Terms and Conditions written on this webpage shall manage your use of our website, Cloth Rental accessible at www.clothrental.com
           </p>
           <p>
             These Terms will be applied fully and affect your use of this Website. By using this Website, you agree to accept all terms and conditions written here. You must not use this Website if you disagree with any of these Website Standard Terms and Conditions.
@@ -21,7 +21,7 @@ function TermsAndConditions() {
 
           <h3>Intellectual Property Rights</h3>
           <p>
-            Other than the content you own, under these Terms, Poshak Sewa and/or its licensors own all the intellectual property rights and materials contained in this Website.
+            Other than the content you own, under these Terms, Cloth Rental and/or its licensors own all the intellectual property rights and materials contained in this Website.
           </p>
           <p>
             You are granted a limited license only for purposes of viewing the material contained on this Website.
@@ -42,30 +42,30 @@ function TermsAndConditions() {
             <li>* using this Website to engage in any advertising or marketing.</li>
           </ul>
           <p>
-            Certain areas of this Website are restricted from being accessed by you and Poshak Sewa may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.
+            Certain areas of this Website are restricted from being accessed by you and Cloth Rental may further restrict access by you to any areas of this Website, at any time, in absolute discretion. Any user ID and password you may have for this Website are confidential and you must maintain confidentiality as well.
           </p>
 
           <h3>Your Content</h3>
           <p>
-            In these Website Standard Terms and Conditions, "Your Content" shall mean any audio, video text, images, or other material you choose to display on this Website. By displaying Your Content, you grant Poshak Sewa a non-exclusive, worldwide irrevocable, sub-licensable license to use, reproduce, adapt, publish, translate, and distribute it in any and all media.
+            In these Website Standard Terms and Conditions, "Your Content" shall mean any audio, video text, images, or other material you choose to display on this Website. By displaying Your Content, you grant Cloth Rental a non-exclusive, worldwide irrevocable, sub-licensable license to use, reproduce, adapt, publish, translate, and distribute it in any and all media.
           </p>
           <p>
-            Your Content must be your own and must not be invading any third-party's rights. Poshak Sewa reserves the right to remove any of Your Content from this Website at any time without notice.
+            Your Content must be your own and must not be invading any third-party's rights. Cloth Rental reserves the right to remove any of Your Content from this Website at any time without notice.
           </p>
 
           <h3>No warranties</h3>
           <p>
-            This Website is provided "as is," with all faults, and Poshak Sewa expresses no representations or warranties, of any kind related to this Website or the materials contained on this Website. Also, nothing contained on this Website shall be interpreted as advising you.
+            This Website is provided "as is," with all faults, and Cloth Rental expresses no representations or warranties, of any kind related to this Website or the materials contained on this Website. Also, nothing contained on this Website shall be interpreted as advising you.
           </p>
 
           <h3>Limitation of liability</h3>
           <p>
-            In no event shall Poshak Sewa, nor any of its officers, directors, and employees, be held liable for anything arising out of or in any way connected with your use of this Website, whether such liability is under contract. Poshak Sewa, including its officers, directors, and employees, shall not be held liable for any indirect, consequential, or special liability arising out of or in any way related to your use of this Website.
+            In no event shall Cloth Rental, nor any of its officers, directors, and employees, be held liable for anything arising out of or in any way connected with your use of this Website, whether such liability is under contract. Cloth Rental, including its officers, directors, and employees, shall not be held liable for any indirect, consequential, or special liability arising out of or in any way related to your use of this Website.
           </p>
 
           <h3>Indemnification</h3>
           <p>
-            You hereby indemnify to the fullest extent Poshak Sewa from and against any and/or all liabilities, costs, demands, causes of action, damages, and expenses arising in any way related to your breach of any of the provisions of these Terms.
+            You hereby indemnify to the fullest extent Cloth Rental from and against any and/or all liabilities, costs, demands, causes of action, damages, and expenses arising in any way related to your breach of any of the provisions of these Terms.
           </p>
 
           <h3>Severability</h3>
@@ -75,22 +75,22 @@ function TermsAndConditions() {
 
           <h3>Variation of Terms</h3>
           <p>
-            Poshak Sewa is permitted to revise these Terms at any time as it sees fit, and by using this Website, you are expected to review these Terms on a regular basis.
+            Cloth Rental is permitted to revise these Terms at any time as it sees fit, and by using this Website, you are expected to review these Terms on a regular basis.
           </p>
 
           <h3>Assignment</h3>
           <p>
-            The Poshak Sewa is allowed to assign, transfer, and subcontract its rights and/or obligations under these Terms without any notification. However, you are not allowed to assign, transfer, or subcontract any of your rights and/or obligations under these Terms.
+            The Cloth Rental is allowed to assign, transfer, and subcontract its rights and/or obligations under these Terms without any notification. However, you are not allowed to assign, transfer, or subcontract any of your rights and/or obligations under these Terms.
           </p>
 
           <h3>Entire Agreement</h3>
           <p>
-            These Terms constitute the entire agreement between Poshak Sewa and you in relation to your use of this Website and supersede all prior agreements and understandings.
+            These Terms constitute the entire agreement between Cloth Rental and you in relation to your use of this Website and supersede all prior agreements and understandings.
           </p>
 
           <h3>Governing Law & Jurisdiction</h3>
           <p>
-            These Terms will be governed by and interpreted in accordance with the laws of the jurisdiction of Poshak Sewa, and you submit to the non-exclusive jurisdiction of the state and federal courts located in that jurisdiction for the resolution of any disputes.
+            These Terms will be governed by and interpreted in accordance with the laws of the jurisdiction of Cloth Rental, and you submit to the non-exclusive jurisdiction of the state and federal courts located in that jurisdiction for the resolution of any disputes.
           </p>
 
           <h3>Linking to Our Website</h3>

@@ -25,7 +25,7 @@ function Register() {
   };
 
   const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[A-Za-z]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
     return emailRegex.test(email);
   };
 
@@ -139,7 +139,7 @@ function Register() {
                       onChange={handleInput}
                       value={registerInput.name}
                       className="form-control"
-                      placeholder="e.g., Poshak Sewa"
+                      placeholder="e.g., Prabin Bagale"
                     />
                     <span>{registerInput.error_list.name}</span>
                   </div>

@@ -15,11 +15,6 @@ class FrontendController extends Controller
     {
         $category = Category::where('status','0')->get();
 
-        // $category =  DB::table('categories')
-        // ->leftJoin('products', 'categories.id', '=', 'products.category_id')
-        // ->select("categories.*","products.image")->where('categories.status',0)->get();
-
-
         return response()->json([
             'status'=>200,
             'category'=>$category
@@ -79,8 +74,8 @@ class FrontendController extends Controller
             else
             {
                 return response()->json([
-                    'status'=>400,
-                    'message'=>'No Product Available'
+                    'status'=>404,
+                    'message'=>'No such product found in the specified category',
                 ]);
             }
         }
@@ -88,7 +83,7 @@ class FrontendController extends Controller
         {
             return response()->json([
                 'status'=>404,
-                'message'=>'No Such Category Found'
+                'message'=>'No such category found',
             ]);
         }
     }

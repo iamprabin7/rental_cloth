@@ -205,8 +205,10 @@ if (!checkoutInput.phone) {
         switch (payment_mode) {
             case 'cod':
                 axios.post(`/api/place-order`, data).then(res=>{
+                    console.log('order',res);
                     if(res.data.status === 200)
                     {
+
                         swal("Order Placed Successfully",res.data.message,"success");
                         setError([]);
                         history.push('/thank-you');
@@ -231,7 +233,7 @@ if (!checkoutInput.phone) {
             //             setError([]);
             //             var myModal = new window.bootstrap.Modal(document.getElementById('payOnlineModal'));
             //             myModal.show();
-            //         }
+               //         }
             //         else if(res.data.status === 422)
             //         {
             //             swal("All fields are mandetory","","error");

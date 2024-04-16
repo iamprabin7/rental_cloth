@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import swal from 'sweetalert';
 
@@ -17,10 +17,10 @@ function Category() {
         meta_descrip: '',
         error_list: [],
     });
-    
+
     const handleInput = (e) => {
         e.persist();
-        setCategory({...categoryInput, [e.target.name]: e.target.value })
+        setCategory({ ...categoryInput, [e.target.name]: e.target.value })
     }
     const handleImage = (e) => {
         setPicture({ image: e.target.files[0] });
@@ -41,36 +41,24 @@ function Category() {
 
         formData.append('status', categoryInput.status);
 
-        // const data = {
-        //     slug:categoryInput.slug,
-        //     name:categoryInput.name,
-        //     description:categoryInput.descrip,
-        //     image:categoryInput.image,
-        //     status:categoryInput.status,
-        //     meta_title:categoryInput.meta_title,
-        //     meta_keyword:categoryInput.meta_keyword,
-        //     meta_descrip:categoryInput.meta_descrip,
-        // }
-        // console.log(data);
-
-        axios.post(`api/store-category`, formData).then(res => {
-            if(res.data.status === 200)
-            {
-                e.target.reset();
-                swal("Success",res.data.message,"success");
-                // document.getElementById('CATEGORY_FORM').reset();
-            }
-            else if(res.data.status === 400)
-            {
-                setCategory({...categoryInput, error_list:res.data.errors});
-            }
-        });
-
+        axios.post(`api/store-category`, formData)
+            .then(res => {
+                console.log('response',res);
+                if (res.data.status === 200) {
+                    e.target.reset();
+                    swal("Success", res.data.message, "success");
+                }
+                else if (res.data.status === 400) {
+                    setCategory({ ...categoryInput, error_list: res.data.errors });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 
     var display_errors = [];
-    if(categoryInput.error_list)
-    {
+    if (categoryInput.error_list) {
         display_errors = [
             categoryInput.error_list.slug,
             categoryInput.error_list.name,
@@ -79,18 +67,18 @@ function Category() {
         ]
     }
 
-    return  (
+    return (
         <div className="container-fluid px-4">
 
             {
-                display_errors.map( (item) => {
-                   return( <p className="mb-1" key={item}>{item}</p>)
+                display_errors.map((item) => {
+                    return (<p className="mb-1" key={item}>{item}</p>)
                 })
             }
 
             <div className="card mt-4">
                 <div className="card-header">
-                    <h4>Add Category 
+                    <h4>Add Category
                         <Link to="/admin/view-category" className="btn btn-primary btn-sm float-end">View Category</Link>
                     </h4>
                 </div>
@@ -122,14 +110,14 @@ function Category() {
                                     <textarea name="descrip" onChange={handleInput} value={categoryInput.descrip} className="form-control"></textarea>
                                 </div>
                                 <div className="col-md-8 form-group mb-3">
-                                        <label>Image</label>
-                                        <input type="file" name="image" onChange={handleImage}  className="form-control" />
-                                        <small className="text-danger">{categoryInput.error_list.image}</small>
-                                    </div>
-                                <div className="form-group mb-3">
+                                    <label>Image</label>
+                                    <input type="file" name="image" onChange={handleImage} className="form-control" />
+                                    <small className="text-danger">{categoryInput.error_list.image}</small>
+                                </div>
+                                {/* <div className="form-group mb-3">
                                     <label>Status</label>
                                     <input type="checkbox" name="status" onChange={handleInput} value={categoryInput.status} /> Status 0=shown/1=hidden
-                                </div>
+                                </div> */}
 
                             </div>
                             <div className="tab-pane card-body border fade" id="seo-tags" role="tabpanel" aria-labelledby="seo-tags-tab">
